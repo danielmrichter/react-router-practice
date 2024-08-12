@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { useState } from 'react';
 import './StudentForm.css'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
 
 function StudentForm() {
     
     const [student, setStudent] = useState('');
-
+    const history = useHistory();
 
     // Called when the submit button is pressed
     const addStudent = (newStudent) => {
@@ -17,6 +18,7 @@ function StudentForm() {
             data: {github_name: newStudent}
         }).then((response) => {
             console.log(response);
+            sendToStudents()
         }).catch((err) => {
             console.log(err);
         });
@@ -32,6 +34,12 @@ function StudentForm() {
     // Clear fields of the form by reseting the user
     const clearStudentFields = () => {
         setStudent('');
+    }
+
+    // Show me the data I just added!
+    const sendToStudents = () => {
+        console.log(`I SEE YOU AND I TRACK YOU! MWAHAHAHAHAHAHA`)
+        history.push('/students')
     }
 
 
